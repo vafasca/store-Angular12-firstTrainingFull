@@ -23,4 +23,8 @@ export class ProductsComponent implements OnInit {
     ).subscribe();
   }
 
+  addToCart(product: Producto):void{
+    console.log('Add to Cart: '+product.name);
+  }
+
 }
