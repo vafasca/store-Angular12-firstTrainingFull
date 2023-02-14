@@ -1,14 +1,21 @@
-<mat-card class="card m-4 w-80">
-    <mat-card-header>
-      <mat-card-title>
-        {{product.name}}
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>{{product.description}}</mat-card-content>
-    <mat-card-actions class=""> 
-        <button mat-flat-button color="primary" class="w-full hover:bg-red-500" (click)="onClick()">
-                Buy {{product.price | currency}}
-                <mat-icon>add_shopping_cart</mat-icon>
-        </button>
-    </mat-card-actions>
-  </mat-card>
+<mat-card class="flex flex-col card m-2 max-w-80 min-h-180 flex-grow h-64 overflow-y-auto">
+  <mat-card-header class="h-16">
+    <mat-card-title>
+      {{ product.name }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="flex-grow h-20 overflow-y-auto">
+    {{ product.description }}
+  </mat-card-content>
+  <mat-card-actions class="mt-auto">
+    <button
+      mat-raised-button
+      
+      class="w-full hover:text-white hover:bg-red-800 bg-red-300"
+      (click)="onClick()"
+    >
+      buy {{ product.price | currency }}
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
