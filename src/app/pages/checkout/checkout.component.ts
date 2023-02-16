@@ -15,6 +15,7 @@ export class CheckoutComponent implements OnInit {
     shippingAdress: '',
     city: ''
   };
+  show = false;
   isDelivery = false;
   stores: Store[] = []
 

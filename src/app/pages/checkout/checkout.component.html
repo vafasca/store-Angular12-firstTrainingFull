@@ -1,4 +1,4 @@
-<div class="container pt-24">
+<div class="container flex justify-center items-center pt-24">
   <form class="form item" (ngSubmit)="onSubmit()" #checkoutForm="ngForm">
     <mat-form-field>
       <input
@@ -47,8 +47,9 @@
         <mat-select 
         name="store"
         #store = "ngModel"
-        [(ngModel)]="model.store"> 
-            <mat-option [value]="tienda" *ngFor="let tienda of stores">
+        [(ngModel)]="model.store"
+        class="w-40"> 
+            <mat-option [value]="tienda" *ngFor="let tienda of stores" class="w-96">
                 {{tienda.name}} - {{tienda.openingHours}}
             </mat-option>
         </mat-select>
@@ -57,8 +58,9 @@
 
   </form>
 </div>
-
-<app-details></app-details>
+<div class="container flex justify-center items-center">
+  <app-details></app-details>
 <div class="container__button">
   <button [disabled]="!checkoutForm.form.valid" mat-raised-button color="primary" type="submit">Checkout</button>
+</div>
 </div>

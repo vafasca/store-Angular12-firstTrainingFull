@@ -1,4 +1,4 @@
-<div class="cantainer__table">
+<!-- <div class="cantainer__table">
   <table class="table">
     <thead>
       <tr>
@@ -19,5 +19,28 @@
   </table>
   <div class="container__total">
     <p class="total"><strong>Total: <span>{{ total$ | async | currency }}</span></strong></p>
+  </div>
+</div> -->
+<div class="container mx-auto">
+  <table class="table-auto">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">Item</th>
+        <th class="px-4 py-2">Qty</th>
+        <th class="px-4 py-2">Price unit</th>
+        <th class="px-4 py-2">Sub total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cart$ | async" class="border-b border-gray-400">
+        <td class="px-4 py-2">{{item.name}}</td>
+        <td class="px-4 py-2">{{item.qty}}</td>
+        <td class="px-4 py-2">{{item.price | currency}}</td>
+        <td class="px-4 py-2">{{item.qty * item.price | currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="container__total mt-4">
+    <p class="total text-xl font-bold"><strong>Total: <span class="text-green-500">{{ total$ | async | currency }}</span></strong></p>
   </div>
 </div>

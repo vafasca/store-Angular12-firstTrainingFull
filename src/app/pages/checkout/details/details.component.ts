@@ -13,6 +13,6 @@ export class DetailsComponent implements OnInit {
   constructor(private shoopingCartSvc: ShoppingCartService) { }
 
   ngOnInit(): void {
+    console.log("asas", this.shoopingCartSvc)
   }
-
 }
