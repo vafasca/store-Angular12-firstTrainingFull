@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Producto } from 'src/app/pages/products/interfaces/product.interface';
 
 @Injectable({
@@ -8,9 +8,9 @@ import { Producto } from 'src/app/pages/products/interfaces/product.interface';
 export class ShoppingCartService {
   products: Producto[] = [];
   //Aqui se guardaran todos los produtos que se aniadan al carrito
-  private cartSubject = new Subject<Producto[]>();
-  private totalSubject = new Subject<number>();
-  private quantitySubject = new Subject<number>();
+  private cartSubject = new BehaviorSubject<Producto[]>([]);
+  private totalSubject = new BehaviorSubject<number>(0);
+  private quantitySubject = new BehaviorSubject<number>(0);
 
   //devolviendo los observables a mi app para que sean consumidos
   get totalAction$(): Observable<number> {//signo de dolar es solo una convencion para que se sepa que es un metodo que devuelve un observable y no una simple promesa o variable cualquiera
@@ -34,17 +34,23 @@ export class ShoppingCartService {
 
   //metodos grl
   private calcTotal(): void{
-    const total = this.products.reduce((acc, prod) => acc += prod.price, 0);
+    const total = this.products.reduce((acc, prod) => acc += prod.qty, 0);
     this.totalSubject.next(total);
   }
 
   private quantityProducts(): void {
-    const quantity = this.products.length;
+    const quantity = this.products.reduce((acc, prod) => acc += (prod.price * prod.qty), 0);
     this.quantitySubject.next(quantity);
   }
 
   private addToCart(product: Producto): void {
-    this.products.push(product);
+    const isProductInCart = this.products.find(({id}) => id == product.id)
+    if(isProductInCart){
+      isProductInCart.qty += 1;
+    }else{
+      this.products.push({... product, qty:1})
+    }
+    // this.products.push(product);
     this.cartSubject.next(this.products);
   }
   constructor() { }

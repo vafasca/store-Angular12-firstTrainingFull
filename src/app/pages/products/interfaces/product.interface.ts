@@ -7,4 +7,5 @@ export interface Producto {
     description: string;
     categoryId: string;
     stock: number;
+    qty: number;
 }
